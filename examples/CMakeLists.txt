@@ -1,10 +1,9 @@
 include_directories(${PROJECT_SOURCE_DIR} ${PROJECT_SOURCE_DIR}/3rdparty)
 
 
+set(LIBRARIES evpp_static ${DEPENDENT_LIBRARIES})
 if (UNIX)
-set(LIBRARIES evpp_static event glog pthread)
 else(UNIX)
-set(LIBRARIES evpp_static event libglog_static)
 link_directories(${PROJECT_SOURCE_DIR}/vsprojects/bin/${CMAKE_BUILD_TYPE}/
 				 ${PROJECT_SOURCE_DIR}/3rdparty/glog-0.3.4/${CMAKE_BUILD_TYPE})
 endif(UNIX)
@@ -12,6 +11,7 @@ endif(UNIX)
 add_subdirectory(apps)
 add_subdirectory(chatroom)
 add_subdirectory(recipes)
+add_subdirectory(http)
 
 add_executable(example_httpecho echo/httpecho/main.cc)
 target_link_libraries(example_httpecho ${LIBRARIES})
@@ -57,21 +57,6 @@ target_link_libraries(example_timer04 ${LIBRARIES})
 
 add_executable(example_timer05 timer/timer05.cc)
 target_link_libraries(example_timer05 ${LIBRARIES})
-
-add_executable(example_http_client_request01 http_client_request/client01.cc)
-target_link_libraries(example_http_client_request01 ${LIBRARIES})
-
-add_executable(example_http_client_request02 http_client_request/client02.cc)
-target_link_libraries(example_http_client_request02 ${LIBRARIES})
-
-add_executable(example_http_client_request03 http_client_request/client03.cc)
-target_link_libraries(example_http_client_request03 ${LIBRARIES})
-
-add_executable(example_http_client_request04 http_client_request/client04.cc)
-target_link_libraries(example_http_client_request04 ${LIBRARIES})
-
-add_executable(example_http_client_request05 http_client_request/client05.cc)
-target_link_libraries(example_http_client_request05 ${LIBRARIES})
 
 add_executable(example_dns_resolve dns_resolve/main.cc)
 target_link_libraries(example_dns_resolve ${LIBRARIES})
